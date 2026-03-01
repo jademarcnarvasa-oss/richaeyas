@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RICHAEYAS — Luxury Women's Fashion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --off-white: #f5f0eb;
+      --cream: #ede8e0;
+      --gold: #b8975a;
+      --gold-light: #d4b07a;
+      --muted: #7a7068;
+      --dark-brown: #1a1510;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Tenor Sans', sans-serif;
+      background: var(--off-white);
+      color: var(--black);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
+      opacity: 0.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 24px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      mix-blend-mode: normal;
+      transition: background 0.4s, padding 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(245,240,235,0.96);
+      backdrop-filter: blur(12px);
+      padding: 16px 60px;
+      border-bottom: 1px solid rgba(184,151,90,0.2);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--off-white);
+      text-decoration: none;
+      transition: color 0.4s;
+    }
+    nav.scrolled .nav-logo { color: var(--black); }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,235,0.85);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav.scrolled .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .nav-icon {
+      color: rgba(245,240,235,0.85);
+      font-size: 1.1rem;
+      cursor: none;
+      transition: color 0.3s;
+    }
+    nav.scrolled .nav-icon { color: var(--muted); }
+    .nav-icon:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      min-height: 700px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: var(--dark-brown);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(160deg, rgba(10,10,10,0.3) 0%, rgba(26,21,16,0.7) 60%, rgba(10,10,10,0.9) 100%),
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 2px,
+          rgba(184,151,90,0.03) 2px,
+          rgba(184,151,90,0.03) 4px
+        );
+    }
+    .hero-pattern {
+      position: absolute;
+      top: 0; right: 0;
+      width: 50%;
+      height: 100%;
+      background: 
+        radial-gradient(ellipse at 70% 40%, rgba(184,151,90,0.12) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(184,151,90,0.05) 0%, transparent 100%);
+    }
+    .hero-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(184,151,90,0.3), transparent);
+      transform: translateY(-50%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 60px 100px;
+      max-width: 700px;
+      animation: heroIn 1.4s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 40px; height: 1px;
+      background: var(--gold);
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--off-white);
+      margin-bottom: 28px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero-subtitle {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,240,235,0.55);
+      max-width: 360px;
+      line-height: 1.8;
+      margin-bottom: 44px;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 16px 40px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      display: inline-block;
+      padding: 15px 40px;
+      border: 1px solid rgba(245,240,235,0.3);
+      color: var(--off-white);
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      right: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(245,240,235,0.4);
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      animation: heroIn 1.8s 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(180deg, rgba(184,151,90,0.6), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    /* MARQUEE STRIP */
+    .marquee-strip {
+      background: var(--gold);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 20s linear infinite;
+    }
+    .marquee-item {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--black);
+      padding: 0 32px;
+    }
+    .marquee-dot {
+      color: var(--dark-brown);
+      opacity: 0.5;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* SECTION COMMON */
+    section { padding: 100px 60px; }
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-label::before {
+      content: '';
+      width: 30px; height: 1px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--black);
+    }
+    .section-title em { font-style: italic; color: var(--muted); }
+
+    /* FEATURED SECTION */
+    .featured {
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 0;
+      min-height: 600px;
+    }
+    .featured-text {
+      padding: 100px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .featured-text p {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: var(--muted);
+      max-width: 400px;
+      margin: 24px 0 40px;
+    }
+    .featured-visual {
+      position: relative;
+      background: var(--black);
+      overflow: hidden;
+      min-height: 500px;
+    }
+    .featured-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 50% 30%, rgba(184,151,90,0.15) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.6) 100%);
+      z-index: 1;
+    }
+    .featured-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      gap: 16px;
+    }
+    .placeholder-icon {
+      font-size: 4rem;
+      opacity: 0.3;
+    }
+    .placeholder-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: rgba(245,240,235,0.4);
+      letter-spacing: 0.2em;
+      font-style: italic;
+    }
+    .featured-tag {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      z-index: 3;
+      background: var(--gold);
+      color: var(--black);
+      padding: 8px 20px;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    /* COLLECTION GRID */
+    .collection { background: var(--off-white); }
+    .collection-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 56px;
+    }
+    .collection-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--muted);
+      padding-bottom: 2px;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .collection-link:hover { color: var(--gold); border-color: var(--gold); }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+    .product-card {
+      position: relative;
+      cursor: none;
+    }
+    .product-image {
+      aspect-ratio: 3/4;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .product-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(10,10,10,0.4) 100%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 1;
+    }
+    .product-card:hover .product-image::before { opacity: 1; }
+    .product-img-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .product-emoji { font-size: 3rem; opacity: 0.25; }
+    .product-label-inner {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+    .product-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 24px;
+      z-index: 2;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.4s;
+    }
+    .product-card:hover .product-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .btn-overlay {
+      width: 100%;
+      padding: 12px;
+      background: var(--off-white);
+      color: var(--black);
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: none;
+      cursor: none;
+      transition: background 0.3s;
+    }
+    .btn-overlay:hover { background: var(--gold); }
+    .product-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--black);
+      color: var(--gold);
+      padding: 5px 12px;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    .product-badge.new { background: var(--gold); color: var(--black); }
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .product-price {
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .product-price strong {
+      color: var(--black);
+      font-weight: 400;
+    }
+    .product-colors {
+      display: flex;
+      gap: 6px;
+    }
+    .color-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* ABOUT / PHILOSOPHY */
+    .philosophy {
+      background: var(--black);
+      color: var(--off-white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .philosophy::before {
+      content: 'RICHAEYAS';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(5rem, 15vw, 14rem);
+      font-weight: 300;
+      color: rgba(184,151,90,0.04);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: 0.1em;
+    }
+    .philosophy .section-label { justify-content: center; }
+    .philosophy .section-label::before { display: none; }
+    .philosophy .section-title { color: var(--off-white); margin: 0 auto 32px; max-width: 700px; }
+    .philosophy-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(245,240,235,0.6);
+      max-width: 600px;
+      margin: 0 auto 56px;
+      line-height: 1.7;
+    }
+    .philosophy-stats {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      border-top: 1px solid rgba(184,151,90,0.2);
+      padding-top: 56px;
+      margin-top: 56px;
+    }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(245,240,235,0.35);
+      margin-top: 6px;
+    }
+
+    /* CATEGORIES */
+    .categories { background: var(--cream); }
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .category-card {
+      aspect-ratio: 4/5;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+      cursor: none;
+    }
+    .category-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.8) 100%);
+      z-index: 1;
+    }
+    .cat-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      opacity: 0.1;
+    }
+    .category-info {
+      position: absolute;
+      bottom: 36px;
+      left: 36px;
+      z-index: 2;
+    }
+    .category-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--off-white);
+      display: block;
+    }
+    .category-count {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-top: 4px;
+      display: block;
+    }
+    .category-card:hover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(184,151,90,0.4);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--off-white); text-align: center; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 60px;
+    }
+    .testimonial-card {
+      padding: 40px;
+      background: var(--cream);
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      color: var(--gold);
+      opacity: 0.3;
+      position: absolute;
+      top: 10px;
+      left: 24px;
+      line-height: 1;
+    }
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--black);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .testimonial-author {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .stars {
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    /* NEWSLETTER */
+    .newsletter {
+      background: var(--dark-brown);
+      text-align: center;
+      padding: 100px 60px;
+    }
+    .newsletter .section-label { justify-content: center; }
+    .newsletter .section-label::before { display: none; }
+    .newsletter .section-title { color: var(--off-white); margin: 0 auto 16px; }
+    .newsletter-sub {
+      font-size: 0.8rem;
+      color: rgba(245,240,235,0.45);
+      letter-spacing: 0.05em;
+      margin-bottom: 40px;
+    }
+    .newsletter-form {
+      display: flex;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .newsletter-input {
+      flex: 1;
+      padding: 16px 24px;
+      background: rgba(245,240,235,0.07);
+      border: 1px solid rgba(184,151,90,0.3);
+      border-right: none;
+      color: var(--off-white);
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      outline: none;
+    }
+    .newsletter-input::placeholder { color: rgba(245,240,235,0.3); }
+    .newsletter-input:focus { border-color: var(--gold); }
+    .newsletter-btn {
+      padding: 16px 28px;
+      background: var(--gold);
+      border: none;
+      color: var(--black);
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: background 0.3s;
+    }
+    .newsletter-btn:hover { background: var(--gold-light); }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      padding: 80px 60px 40px;
+      color: rgba(245,240,235,0.4);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+      border-bottom: 1px solid rgba(184,151,90,0.12);
+      padding-bottom: 60px;
+    }
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--off-white);
+      margin-bottom: 16px;
+    }
+    .footer-brand-desc {
+      font-size: 0.75rem;
+      line-height: 1.9;
+      max-width: 280px;
+      margin-bottom: 28px;
+    }
+    .footer-socials { display: flex; gap: 16px; }
+    .footer-social {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(184,151,90,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 0.75rem;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .footer-social:hover {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+    .footer-col-title {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a {
+      font-size: 0.78rem;
+      color: rgba(245,240,235,0.4);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+    }
+    .footer-bottom a {
+      color: rgba(245,240,235,0.3);
+      text-decoration: none;
+    }
+    .footer-bottom a:hover { color: var(--gold); }
+
+    /* ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up:nth-child(2) { transition-delay: 0.1s; }
+    .fade-up:nth-child(3) { transition-delay: 0.2s; }
+    .fade-up:nth-child(4) { transition-delay: 0.3s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      section { padding: 70px 24px; }
+      .hero-content { padding: 0 24px 80px; }
+      .hero-scroll { right: 24px; }
+      .featured { grid-template-columns: 1fr; }
+      .featured-visual { min-height: 320px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .categories-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .philosophy-stats { gap: 40px; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-input { border-right: 1px solid rgba(184,151,90,0.3); border-bottom: none; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">RICHAEYAS</a>
+    <ul class="nav-links">
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#categories">Categories</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-icons">
+      <span class="nav-icon">🔍</span>
+      <span class="nav-icon">♡</span>
+      <span class="nav-icon">◻</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-line"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">New Collection 2025</div>
+      <h1 class="hero-title">Where <em>Elegance</em><br>Meets Identity</h1>
+      <p class="hero-subtitle">Timeless pieces crafted for the modern woman — refined silhouettes, luxurious fabrics, and effortless grace.</p>
+      <div class="hero-cta">
+        <a href="#collection" class="btn-primary">Explore Collection</a>
+        <a href="#about" class="btn-ghost">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span class="marquee-item">Luxury Women's Fashion</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">New Arrivals 2025</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Elegance Redefined</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Free Shipping Over ₱2,000</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Richaeyas Collection</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Timeless Style</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Luxury Women's Fashion</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">New Arrivals 2025</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Elegance Redefined</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Free Shipping Over ₱2,000</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Richaeyas Collection</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Timeless Style</span><span class="marquee-dot">◆</span>
+    </div>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="featured fade-up">
+    <div class="featured-text">
+      <div class="section-label">Featured</div>
+      <h2 class="section-title">The Signature<br><em>Evening Edit</em></h2>
+      <p>Our most-loved evening pieces — draped in rich fabrics and shaped by timeless silhouettes. Each piece is designed to make you feel extraordinary.</p>
+      <a href="#collection" class="btn-primary" style="align-self:flex-start">Shop Evening Wear</a>
+    </div>
+    <div class="featured-visual">
+      <div class="featured-placeholder">
+        <div class="placeholder-icon">👗</div>
+        <div class="placeholder-text">Evening Collection</div>
+      </div>
+      <div class="featured-tag">New Season</div>
+    </div>
+  </div>
+
+  <!-- COLLECTION -->
+  <section class="collection" id="collection">
+    <div class="collection-header fade-up">
+      <div>
+        <div class="section-label">Our Products</div>
+        <h2 class="section-title">New <em>Arrivals</em></h2>
+      </div>
+      <a href="#" class="collection-link">View All Products</a>
+    </div>
+    <div class="products-grid">
+      <div class="product-card fade-up">
+        <div class="product-image">
+          <div class="product-img-placeholder">
+            <div class="product-emoji">👗</div>
+            <div class="product-label-inner">Silk Gown</div>
+          </div>
+          <span class="product-badge new">New</span>
+          <div class="product-overlay">
+            <button class="btn-overlay">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-name">Velvet Evening Gown</div>
+        <div class="product-meta">
+          <div class="product-price"><strong>₱4,850</strong></div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#1a1510"></div>
+            <div class="color-dot" style="background:#b8975a"></div>
+            <div class="color-dot" style="background:#8b2e2e"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-image">
+          <div class="product-img-placeholder">
+            <div class="product-emoji">👚</div>
+            <div class="product-label-inner">Blouse</div>
+          </div>
+          <div class="product-overlay">
+            <button class="btn-overlay">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-name">Ivory Silk Blouse</div>
+        <div class="product-meta">
+          <div class="product-price"><strong>₱2,200</strong></div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#f5f0eb"></div>
+            <div class="color-dot" style="background:#e8d5c0"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-image">
+          <div class="product-img-placeholder">
+            <div class="product-emoji">🧥</div>
+            <div class="product-label-inner">Coat</div>
+          </div>
+          <span class="product-badge">Limited</span>
+          <div class="product-overlay">
+            <button class="btn-overlay">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-name">Cashmere Wrap Coat</div>
+        <div class="product-meta">
+          <div class="product-price"><strong>₱7,500</strong></div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#7a7068"></div>
+            <div class="color-dot" style="background:#1a1510"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-image">
+          <div class="product-img-placeholder">
+            <div class="product-emoji">👘</div>
+            <div class="product-label-inner">Dress</div>
+          </div>
+          <span class="product-badge new">New</span>
+          <div class="product-overlay">
+            <button class="btn-overlay">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-name">Draped Midi Dress</div>
+        <div class="product-meta">
+          <div class="product-price"><strong>₱3,650</strong></div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#b8975a"></div>
+            <div class="color-dot" style="background:#0a0a0a"></div>
+            <div class="color-dot" style="background:#5c3d2e"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy" id="about">
+    <div class="section-label">Our Philosophy</div>
+    <h2 class="section-title">Crafted for <em>Women</em><br>Who Define Their Own Luxury</h2>
+    <p class="philosophy-quote">"Fashion is not just clothing — it is the language of the woman who wears it, a silent proclamation of her grace."</p>
+    <a href="#collection" class="btn-primary">Discover Our Story</a>
+    <div class="philosophy-stats">
+      <div>
+        <span class="stat-number">500+</span>
+        <div class="stat-label">Unique Pieces</div>
+      </div>
+      <div>
+        <span class="stat-number">3K+</span>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div>
+        <span class="stat-number">100%</span>
+        <div class="stat-label">Premium Quality</div>
+      </div>
+      <div>
+        <span class="stat-number">5★</span>
+        <div class="stat-label">Average Rating</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories" id="categories">
+    <div class="fade-up">
+      <div class="section-label">Shop by Style</div>
+      <h2 class="section-title">Explore <em>Categories</em></h2>
+    </div>
+    <div class="categories-grid">
+      <div class="category-card fade-up">
+        <div class="cat-placeholder">👗</div>
+        <div class="category-info">
+          <span class="category-name">Evening Wear</span>
+          <span class="category-count">42 Pieces</span>
+        </div>
+      </div>
+      <div class="category-card fade-up">
+        <div class="cat-placeholder">👔</div>
+        <div class="category-info">
+          <span class="category-name">Work Attire</span>
+          <span class="category-count">38 Pieces</span>
+        </div>
+      </div>
+      <div class="category-card fade-up">
+        <div class="cat-placeholder">✨</div>
+        <div class="category-info">
+          <span class="category-name">Accessories</span>
+          <span class="category-count">65 Pieces</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="section-label" style="justify-content:center"><span style="display:flex;align-items:center;gap:14px"><span style="width:30px;height:1px;background:var(--gold);display:inline-block"></span>Client Love</span></div>
+    <h2 class="section-title">What Our <em>Clients Say</em></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">The quality of the fabrics is absolutely breathtaking. I wore the velvet gown to a gala and received so many compliments. Richaeyas is now my go-to for every special occasion.</p>
+        <div class="testimonial-author">— Maria Santos, Cebu</div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">Every piece feels like it was made just for me. The attention to detail, the silhouettes, the draping — it is all so thoughtful and genuinely luxurious.</p>
+        <div class="testimonial-author">— Ana Reyes, Manila</div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">I have never felt more confident and elegant. The cashmere coat is worth every peso. This is true luxury fashion that understands the modern Filipino woman.</p>
+        <div class="testimonial-author">— Claire Villanueva, Davao</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" id="contact">
+    <div class="section-label">Stay Connected</div>
+    <h2 class="section-title" style="color:var(--off-white)">Join the <em style="color:var(--gold-light)">Richaeyas</em> Circle</h2>
+    <p class="newsletter-sub">Be the first to know about new collections, exclusive offers, and private events.</p>
+    <div class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="Your email address" />
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">RICHAEYAS</div>
+        <p>Luxury women's fashion crafted for the modern woman. Timeless elegance, refined style.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social">f</a>
+          <a href="#" class="footer-social">ig</a>
+          <a href="#" class="footer-social">tw</a>
+          <a href="#" class="footer-social">yt</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Shop</div>
+        <ul class="footer-links">
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Evening Wear</a></li>
+          <li><a href="#">Work Attire</a></li>
+          <li><a href="#">Accessories</a></li>
+          <li><a href="#">Sale</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Help</div>
+        <ul class="footer-links">
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Order Tracking</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="#">hello@richaeyas.com</a></li>
+          <li><a href="#">+63 912 345 6789</a></li>
+          <li><a href="#">Mon–Sat, 9am–6pm</a></li>
+          <li><a href="#">Philippines</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Richaeyas. All Rights Reserved.</span>
+      <span>
+        <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+        <a href="#">Terms of Service</a> &nbsp;·&nbsp;
+        <a href="#">Cookie Policy</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      setTimeout(() => {
+        ring.style.left = e.clientX + 'px';
+        ring.style.top = e.clientY + 'px';
+      }, 80);
+    });
+
+    // Nav scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Fade-up on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
